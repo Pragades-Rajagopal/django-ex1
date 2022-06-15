@@ -1,13 +1,12 @@
-from django.http import HttpResponse
+from django.shortcuts import render
 import datetime
 
 def current_datetime(request):
     now = datetime.datetime.now()
-    html = "<html><title>Time</title><body>It is now %s.</body></html>" %now
-    return HttpResponse(html)
+    return render('current_time.html', {'current_time': now})
 
 def hours_ahead(request, offset):
     offset = int(offset)
     time = datetime.datetime.now() + datetime.timedelta(hours=offset)
-    html = "<html><title>Time after</title><body>After %s hour(s), it'll be %s.</body></html>" % (offset, time)
-    return HttpResponse(html)   
+      
+
