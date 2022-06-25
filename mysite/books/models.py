@@ -26,7 +26,7 @@ class Author(models.Model):
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
     email = models.EmailField()
-    # headshot = models.ImageField(upload_to=imagePath)
+    headshot = models.ImageField(upload_to=imagePath)
 
     def __str__(self):
         return '%s %s' % (self.first_name, self.last_name)
