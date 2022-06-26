@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact us</title>
+</head>
+<body>
+    <div class="container">
+        <h3>Contact us</h3>
+        <form action="." method="post">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <th><label for="id_topic">Topic:</label></th>
+                    <td>
+                        <select name="topic" id="id_topic">
+                            <option value="general">General enquiry</option>
+                            <option value="bug">Bug report</option>
+                            <option value="suggestion">Suggestion</option>
+                        </select>
+                    </td>
+                    </tr>
+                    <tr>
+                        <th><label for="id_message">Message:</label></th>
+                        <td><input type="text" name="message" id="id_message" /></td>
+                    </tr>
+                    <tr>
+                        <th><label for="id_sender">Sender:</label></th>
+                        <td><input type="text" name="sender" id="id_sender" /></td>
+                    </tr>
+            </table>
+            <p><input type="submit" value="Submit"></p>
+        </form>
+    </div>
+</body>
+</html>

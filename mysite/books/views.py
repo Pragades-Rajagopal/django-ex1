@@ -1,6 +1,9 @@
 from django.shortcuts import render
-from django.db.models import Q
+from django.http import HttpResponseRedirect
+from django.core.mail import send_mail
+from django.db.models.query_utils import Q
 from books.models import Book
+from books.forms import ContactForm
 
 def search (request):
     query = request.GET.get('q', '')
@@ -18,3 +21,22 @@ def search (request):
         'results': results,
         'query': query
     })
+
+
+def contact (request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            topic = form.cleaned_data['topic']
+            message = form.cleaned_data['message']
+            sender = form.cleaned_data.get('sender', 'noreply@example.com')
+            send_mail(
+                'Feedback from your site Mysite, topic: ' + topic,
+                message, sender,
+                ['admin@example.com']
+            )
+            return HttpResponseRedirect('<html><body>Thanks</body><html>')
+    else:
+        form = ContactForm()
+    return render(request, 'books/contact.html', { 'form': form })
+
