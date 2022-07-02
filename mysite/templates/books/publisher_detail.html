@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publisher Detail</title>
+</head>
+<body>
+    <div class="container">
+    <h2>Publisher Detail</h2>
+
+    <h3>{{ publisher.name }}</h3>
+    <p><strong>Website:</strong> {{publisher.website}}</p>
+    <p><strong>Address:</strong> {{publisher.address}}</p>
+    <p><strong>State/Province:</strong> {{publisher.state_province}}</p>
+    <p><strong>Country:</strong> {{publisher.country}}</p>
+    
+    <label><strong>Books published</strong></label>
+    {% if books %}
+    {% for book in books %}
+    <ul>
+        <li>{{ book.title }}</li>
+    </ul>
+    {% endfor %}
+    {% else %}
+    <p>No books published yet</p>
+    {% endif %}
+    </div>
+    <footer>
+        <a href="{% url 'books:publisher_list' %}">Go back</a>
+    </footer>
+</body>
+</html>

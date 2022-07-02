@@ -1,8 +1,10 @@
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect, Http404
 from django.core.mail import send_mail
 from django.db.models.query_utils import Q
-from books.models import Book
+from django.template import TemplateDoesNotExist
+from django.views.generic import ListView
+from books.models import Book, Publisher
 from books.forms import ContactForm
 
 def search (request):
@@ -35,8 +37,26 @@ def contact (request):
                 message, sender,
                 ['admin@example.com']
             )
+            print(topic + '--' + message + '--' + sender)
             return HttpResponseRedirect('<html><body>Thanks</body><html>')
     else:
         form = ContactForm()
     return render(request, 'books/contact.html', { 'form': form })
+
+
+def about_pages(request):
+    try:
+        return render(request, 'books/about.html')
+    except TemplateDoesNotExist:
+        raise Http404()
+
+
+class PulisherListView(ListView):
+    model = Publisher
+    context_object_name: str = 'pub_list'
+
+def get_publisher(request, pub_id):
+    publisher = get_object_or_404(Publisher, pk=pub_id)
+    books = Book.objects.filter(publisher_id=publisher.id)
+    return render(request, 'books/publisher_detail.html', {'publisher': publisher, 'books': books})
 
