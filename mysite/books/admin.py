@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Publisher, Author, Book
 
 admin.site.site_header = 'Mysite Administration'
-admin.site.site_title = 'Mysite Admin Lounge'
+admin.site.site_title = 'Lounge'
 admin.site.index_title = 'Mysite Admin'
 
 class BookInline(admin.TabularInline):

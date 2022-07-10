@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', current_datetime),
     path('books/', include('books.urls')),
+    path('students/', include('students.urls')),
 ]
