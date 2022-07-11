@@ -5,6 +5,8 @@ app_name = 'students'
 
 urlpatterns = [
     path('hello/', views.hello),
-    path('marksheet/<int:id>', views.marksheet)
+    path('list/', views.student_list.as_view(), name='student_list'),
+    path('marksheet/<int:id>', views.marksheet, name='marksheet'),
+    path('marksheet/<int:id>', views.marksheet, name='get_marks')
 ]
 

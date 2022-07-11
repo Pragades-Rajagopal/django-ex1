@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Marksheet</title>
+    <style>
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <h2>{{ student }}'s Marksheet</h2>
+    {% if message %}
+        <p><strong>{{ message }}</strong></p>
+    {% else %}
+    <ul>
+        <label>Subject marks</label>
+        {% for mark in marks %}
+            <ul>
+                <li>{{ mark.subject }} : {{ mark.mark }}</li>
+            </ul>
+        {% endfor %}
+        <p>Total: {{ total }} / 600</p>
+        <p>Average: {{ avg }} (average of {{ marks.count }} subject{{ marks | pluralize }})</p>
+    </ul>
+    {% endif %}
+    <a href="{% url 'students:student_list' %}">Back</a>
+    </div>
+</body>
+</html>
