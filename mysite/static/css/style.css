@@ -1,0 +1,48 @@
+html {
+    font-family: Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 18px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.h2-l {
+    text-align: center;
+    text-transform: lowercase;
+}
+
+.student-link {
+    color: hsl(0, 79%, 72%);
+}
+
+.container {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+table, tr, td {
+    border-color: #000;
+    border-style: solid;
+    border-width: 1px;
+}
+
+td {
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+}
+
+.tbl-header {
+    font-weight: bold;
+    background-color: hsl(0, 0%, 50%, 25%);
+}
+
+.nobullet {
+    list-style: none;
+}
+
+.std-cell {
+    background-color: hsl(195, 53%, 79%, 30%);
+}

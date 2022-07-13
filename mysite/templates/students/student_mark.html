@@ -1,34 +1,39 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <title>Student Marksheet</title>
-    <style>
-        a {
-            text-decoration: none;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
-    <h2>{{ student }}'s Marksheet</h2>
-    {% if message %}
-        <p><strong>{{ message }}</strong></p>
-    {% else %}
-    <ul>
-        <label>Subject marks</label>
-        {% for mark in marks %}
-            <ul>
-                <li>{{ mark.subject }} : {{ mark.mark }}</li>
-            </ul>
-        {% endfor %}
-        <p>Total: {{ total }} / 600</p>
+        <h2>{{ student }}'s Marksheet</h2>
+        <p>Grade : {{ student.grade }}</p>
+        <p>DOB : {{ student.dob }}</p>
+        {% if message %}
+            <p><strong>{{ message }}</strong></p>
+        {% else %}
+        <table>
+            <thead class="tbl-header"> 
+                <td>Subject</td>
+                <td>Mark</td>
+            </thead>
+            <tbody>
+                {% for mark in marks %}
+                <tr>
+                    <td>{{ mark.subject }}</td>
+                    <td>{{ mark.mark }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p>Total: {{ total }} / 600 | Result: {% if total >= 530 %} <label style="color: hsl(120, 100%, 25%, 60%);">Pass</label> {% else %} <label style="color: red">Fail</label> {% endif %}</p>
         <p>Average: {{ avg }} (average of {{ marks.count }} subject{{ marks | pluralize }})</p>
-    </ul>
-    {% endif %}
-    <a href="{% url 'students:student_list' %}">Back</a>
+        {% endif %}
+        <p><a href="{% url 'students:student_list' %}">Listview</a> | <a href="{% url 'students:student_page' %}">Tableview</a></p>
     </div>
 </body>
 </html>

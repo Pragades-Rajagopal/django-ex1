@@ -1,24 +1,20 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <title>Students list</title>
-    <style>
-        a {
-            text-decoration: none;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
-    <h2>Students</h2>
-    <ul>
+    <h2 class="h2-l">Students</h2>
         {% for student in student_list %}
-        <li><a href="{% url 'students:marksheet' student.id %}">{{ student.name }}</a> (Grade: {{ student.grade }})</li>
+        <li class="nobullet"><a class="student-link" href="{% url 'students:marksheet' student.id %}">{{ student.name }}</a> (Grade: {{ student.grade }})</li>
         {% endfor %}
-    </ul>
+        <p><a href="{% url 'students:student_page' %}">Tableview</a></p>
     </div>
 </body>
 </html>

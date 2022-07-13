@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Student details</title>
+</head>
+<body>
+    <div class="container">
+    <h2 class="h2-l">Student details</h2>
+        <table>
+            <thead class="tbl-header">
+                <td>Name</td>
+                <td>Grade</td>
+                <td>DOB</td>
+                <td>English</td>
+                <td>German</td>
+                <td>Science</td>
+                <td>Social Studies</td>
+                <td>Math</td>
+                <td>Ethics</td>
+                <td>Total</td>
+                <td>Result</td>
+            </thead>
+            <tbody>
+                {% for m in mark_list %}
+                    <tr>
+                        <td class="std-cell"><a class="student-link" href="{% url 'students:marksheet' m.student.id %}">{{ m.student.name }}</a></td>
+                        <td class="std-cell">{{ m.student.grade }}</td>
+                        <td class="std-cell">{{ m.student.dob }}</td>
+                        {% for d in m.mark_details %}
+                        <td>{{ d.mark }}</td>
+                        {% endfor %}
+                        {% for t in m.total %}
+                        <td>{{ t.total }}</td>
+                        {% endfor %}
+                        {% for t in m.total %}
+                        {% if t.total >= 530 %}
+                        <td style="background-color: hsl(120, 73%, 75%, 75%);">Pass</td>
+                        {% else %}
+                        <td style="background-color: hsl(0, 100%, 50%, 50%);">Fail</td>
+                        {% endif %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p><a href="{% url 'students:student_list' %}">Listview</a></p>
+    </div>
+</body>
+</html>
